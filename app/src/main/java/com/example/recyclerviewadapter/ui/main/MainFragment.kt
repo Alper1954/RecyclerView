@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.recyclerviewadapter.R
 import com.example.recyclerviewadapter.databinding.MainFragmentBinding
 
 
 class MainFragment : Fragment() {
-
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
 
@@ -23,15 +23,12 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nbItems = "${viewModel.nbItems} items"
-        binding.nbItems.text=nbItems
+        binding.nbItems.text = activity?.resources?.getString(R.string.nbItems, viewModel.items.size.toString())
 
         val myDataset = viewModel.items
         binding.recyclerView.adapter = ItemAdapter(myDataset)
     }
-
 }
